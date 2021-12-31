@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="guardar()">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+            <input type="text" class="form-control" formControlName="titulo" placeholder="Título">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text bg-white">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+            <textarea formControlName="descripcion" type="text" ng-model="xb" class="form-control" placeholder="Descripción"
+                maxlength="3000"></textarea>
+        </div>
+    </div>
+    <div class="form-grup">
+        <button class="btn btn-success btn-lg btn-lg btn-block" [disabled]="form.invalid" type="submit"><i class="fas fa-database"></i>
+            Aceptar</button>
+    </div>
+</form>
