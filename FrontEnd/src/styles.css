@@ -11,3 +11,9 @@ input.ng-touched-valid{
 textarea.ng-touched-valid{
     border-color: #28a745
 }
+.font1{
+    font-family: 'Playfair Display', serif;
+}
+.font2{
+    font-family: 'Oswald', sans-serif;
+}

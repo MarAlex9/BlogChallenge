@@ -1,0 +1,21 @@
+p {
+    color: navy;
+    text-indent: 30px;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+
+  a:link {
+    
+    text-decoration: none;
+  }
+
+  .colo{
+    font-size: 13px;
+    color: #222
+      
+  }
+
+li {
+    list-style-type: none;
+}

@@ -1,27 +1,84 @@
-<form [formGroup]="form" (ngSubmit)="guardar()">
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text bg-white">
-                    <i class="fas fa-user-circle"></i>
+<div *ngIf="!showMainContent">
+    <button (click)="ShowHideButton()" class="btn btn-success btn-lg btn-lg btn-block">Ocultar</button>
+
+</div>
+<br/>
+<div *ngIf="showMainContent">
+    <button (click)="ShowHideButton()" class="btn btn-success btn-lg btn-lg btn-block">Crear publicación</button>
+</div>
+<form [formGroup]="form" (ngSubmit)="pushArray()">
+    <div *ngIf="!showMainContent">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <input type="text" class="form-control" formControlName="titulo" placeholder="Título">
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <textarea formControlName="descripcion" rows="12" type="text" ng-model="xb" class="form-control"
+                            placeholder="Descripción" maxlength="3000"></textarea>
+                    </div>
                 </div>
             </div>
-            <input type="text" class="form-control" formControlName="titulo" placeholder="Título">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text bg-white">
-                    <i class="fas fa-user-circle"></i>
+            <div class="col-md-5">
+                <div>
+                    <input (change)="capturarFile($event)" type="file" class="form-control" formControlName="imagen">
+                </div>
+                <br />
+                <div *ngIf="verImagen">
+                    <img [src]="verImagen" width="550" height="280">
                 </div>
             </div>
-            <textarea formControlName="descripcion" type="text" ng-model="xb" class="form-control" placeholder="Descripción"
-                maxlength="3000"></textarea>
         </div>
-    </div>
-    <div class="form-grup">
-        <button class="btn btn-success btn-lg btn-lg btn-block" [disabled]="form.invalid" type="submit"><i class="fas fa-database"></i>
-            Aceptar</button>
+        <br />
+        <div class="form-grup">
+            <button class="btn btn-success btn-lg btn-lg btn-block" [disabled]="form.invalid" type="submit"><i
+                    class="fas fa-database"></i>
+                Publicar</button>
+        </div>
     </div>
 </form>
+<ul>
+    <li *ngFor="let blog of arrayBlog">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="" class="container font1">
+                    <h3>{{blog.titulo}}</h3>
+                </a>
+                <p class="container font2">{{blog.descripcion}}</p>
+ 
+                <h5 >
+                    <a class="container colo" href="">
+                      {{blog.fecha}}
+                </a>
+                </h5>
+            </div>
+            <div class="col-md-5">
+            <div *ngIf="blog.imagen">
+                <img [src]="blog.imagen" width="550" height="280">
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+
+            </div>
+            <div class="col-md-7">
+                
+            </div>
+            <div class="col-md-7">
+                
+            </div>
+            <div class="col-md-7">
+                <i class="far fa-trash-alt fa-lg text-danger" (click)="elimnar(blog)" style="cursor: pointer;"></i>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </li>
+</ul>

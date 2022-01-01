@@ -1,1 +1,48 @@
-<p>list-blogs works!</p>
+<ul>
+    <li *ngFor="let blog of blogService.list">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="" class="container font1">
+                    <h3>{{blog.titulo}}</h3>
+                </a>
+                <p class="container font2">{{blog.descripcion}}</p>
+ 
+                <h5 >
+                    <a class="container colo" href="">
+                      {{blog.fecha}}
+                </a>
+                </h5>
+            </div>
+            <div class="col-md-5">
+            <div *ngIf="blog.imagen">
+                <img [src]="blog.imagen" width="550" height="280">
+            </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </li>
+</ul>
+<ul>
+    <li *ngFor="let blog of blogService.listRemote">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{blog.url}}" class="container font1">
+                    <h3>{{blog.title}}</h3>
+                </a>
+                <p class="container font2">{{blog.description}}</p>
+                <p class="container font2">{{blog.content}}</p>
+                <h5 >
+                    <a class="container colo" href="{{blog.source.url}}">
+                    Autor: {{blog.source.name}} - {{blog.publishedAt}}
+                </a>
+                </h5>
+            </div>
+            <div class="col-md-5" >
+                <img src="{{blog.image}}" width="550" height="280">
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </li>
+</ul>

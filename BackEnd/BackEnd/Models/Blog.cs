@@ -17,10 +17,10 @@ namespace BackEnd.Models
         [Required]
         [Column(TypeName = "varchar(3000)")]
         public string descripcion { get; set; }
-        
+
         [Column(TypeName = "datetime")]
         public DateTime fecha { get; set; }
         [Column(TypeName = "varbinary(max)")]
-        public byte[] imagen { get; set; }
+        public String imagen { get; set; }
     }
 }
