@@ -15,5 +15,6 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>BackEnd.AplicationDBContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
+    <NameOfLastUsedPublishProfile>appBlog - Web Deploy</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

@@ -2,7 +2,7 @@
     <button (click)="ShowHideButton()" class="btn btn-success btn-lg btn-lg btn-block">Ocultar</button>
 
 </div>
-<br/>
+<br />
 <div *ngIf="showMainContent">
     <button (click)="ShowHideButton()" class="btn btn-success btn-lg btn-lg btn-block">Crear publicación</button>
 </div>
@@ -51,34 +51,31 @@
                     <h3>{{blog.titulo}}</h3>
                 </a>
                 <p class="container font2">{{blog.descripcion}}</p>
- 
-                <h5 >
+
+                <h5>
                     <a class="container colo" href="">
-                      {{blog.fecha}}
-                </a>
+                        {{blog.fecha}}
+                    </a>
                 </h5>
             </div>
             <div class="col-md-5">
-            <div *ngIf="blog.imagen">
-                <img [src]="blog.imagen" width="550" height="280">
-            </div>
+                <div *ngIf="blog.imagen">
+                    <img [src]="blog.imagen" width="550" height="280">
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-7">
-
+            <div class="col-md-1">
+                <i class="far fa-save fa-lg text-info" (click)="guardar(blog)" style="cursor: pointer;"></i>
             </div>
-            <div class="col-md-7">
-                
+            <div class="col-md-1">
+                <i class="far fa-edit fa-lg text-info" (click)="actualizar(blog)" style="cursor: pointer;"></i>
             </div>
-            <div class="col-md-7">
-                
-            </div>
-            <div class="col-md-7">
-                <i class="far fa-trash-alt fa-lg text-danger" (click)="elimnar(blog)" style="cursor: pointer;"></i>
+            <div class="col-md-1">
+                <i class="far fa-trash-alt fa-lg text-danger" (click)="eliminar(blog)" style="cursor: pointer;"></i>
             </div>
         </div>
-        <br/>
-        <br/>
+        <br />
+        <br />
     </li>
 </ul>

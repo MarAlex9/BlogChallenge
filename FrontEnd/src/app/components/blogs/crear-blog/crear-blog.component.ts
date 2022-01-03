@@ -1,4 +1,3 @@
-import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -13,10 +12,15 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class CrearBlogComponent implements OnInit {
 
+  //DECLAR VARIABLES
   form: FormGroup;
+  editBlogFlag: Boolean = false;
+  editBlog: Blog = new Blog;
   arrayBlog: Blog[] = [];
   showMainContent: Boolean = true;
   public verImagen: string | undefined;
+
+
   constructor(private formBuilder: FormBuilder,
     private blogService: BlogService,
     private sanitizer: DomSanitizer,
@@ -29,46 +33,95 @@ export class CrearBlogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.arrayBlog = JSON.parse(localStorage.getItem('array'));
+    if (this.arrayBlog == null) {
+      this.arrayBlog = [];
+    }
   }
+
+
   //Mètodo para guardar un artículo en la BDD
-  guardar() {
+  guardar(blog: Blog) {
+    try {
+      if (confirm('Una vez guardado el artículo no se puede hacer modificaciones')) {
+        console.log(blog)
+        this.blogService.guardar(blog).subscribe(data => {
+          this.form.reset();
+        })      
+        this.toastr.success('Exitosamente', 'El artículo se guardo');
+        this.verImagen = '';
+        this.deleteArticulo(blog);      
+      }
+    }
+    catch (error) {
+      this.toastr.error(`${error}`, 'Error al guardar el artículo');
+    }
+   // window.location.reload();
+  }
+
+  //Método para guardar la información en un array
+  pushArray() {
     try {
       const blog: Blog = {
         titulo: this.form.get('titulo').value,
         descripcion: this.form.get('descripcion').value,
         imagen: this.verImagen
       }
-      this.blogService.guardar(blog).subscribe(data => {
-        this.form.reset();
-      })
-      this.toastr.success('Exitosamente', 'El artículo se guardo');
-      this.blogService.obtenerBlog();
+      if (this.editBlogFlag) {
+        this.editBlogFlag = false;
+        //Obtiene el index del objento dentro del array
+        const objIndex = this.arrayBlog.findIndex((obj => obj.titulo == this.editBlog.titulo &&
+          obj.descripcion == this.editBlog.descripcion));
+        this.arrayBlog[objIndex] = blog;
+        this.toastr.success('Exitosamente', 'El artículo se actualizó');
+      } else {
+        this.arrayBlog.push(blog);
+        this.toastr.success('Exitosamente', 'El artículo se creo');
+      }
+      this.form.reset();
       this.verImagen = '';
+      this.ShowHideButton();
+      localStorage.setItem('array', JSON.stringify(this.arrayBlog));
+    } catch (error) {
+      this.toastr.error(`${error}`, 'Error');
     }
-    catch (error) {
+
+  }
+
+  //Eliminar un elemento del array
+  eliminar(blog: Blog) {
+    try {
+      if (confirm("¿Esta seguro de eliminar el artículo?")) {
+
+        this.deleteArticulo(blog);
+        this.toastr.success('Exitosamente', 'El artículo se elimino');
+
+      }
+    } catch (error) {
       this.toastr.error(`${error}`, 'Error al guardar el artículo');
     }
-
+  }
+  deleteArticulo(blog: Blog) {
+    this.arrayBlog.forEach((value, index) => {
+      if (value.titulo == blog.titulo && value.descripcion == blog.descripcion) this.arrayBlog.splice(index, 1);
+    })
+    localStorage.setItem('array', JSON.stringify(this.arrayBlog));
   }
 
-  //Método para guardar la información en un array
-  pushArray() {
-    const blog: Blog = {
-      titulo: this.form.get('titulo').value,
-      descripcion: this.form.get('descripcion').value,
-      imagen: this.verImagen
-    }
-    this.arrayBlog.push(blog);
-    this.form.reset();
-    this.toastr.success('Exitosamente', 'El artículo se creo');
-    this.ShowHideButton();
+  //método que permite actualizar el array
+  actualizar(blog: Blog) {
+    this.form.patchValue({
+      titulo: blog.titulo,
+      descripcion: blog.descripcion,
+      imagen: blog.imagen
+    });
+    this.verImagen = blog.imagen;
+    this.editBlog = blog;
+    this.showMainContent = false;
+    this.editBlogFlag = true;
   }
 
-  //eliminar un elemento del array
-  eliminar(blog: Blog) {
-    this.arrayBlog.remove(blog);
 
-  }
   //Permite mostrar u ocultar un div
   ShowHideButton() {
     this.showMainContent = this.showMainContent ? false : true;
@@ -79,7 +132,11 @@ export class CrearBlogComponent implements OnInit {
     const imgCapturada = event.target.files[0];
     this.extraerBase64(imgCapturada).then((image: any) => {
       this.verImagen = image.base;
-      console.log(this.verImagen)
+      const ext = this.verImagen?.substring(11, 14);
+      if (!(ext == 'jpe'! || ext == 'png')) {
+        this.toastr.warning('Debe ser .jpg o .png', 'Formato no permitido');
+        this.verImagen = '';
+      }
     })
 
   }
