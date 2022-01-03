@@ -3,4 +3,7 @@
   <parameter name="IIS Web Application Name" description="" value="appBlog" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\FERNANDEZ\\Desktop\\BlogChallenge\\BackEnd\\BackEnd\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
   </parameter>
+  <parameter name="BackEnd.AplicationDBContext" description="" value="Data Source=tcp:svrblog2.database.windows.net,1433;Initial Catalog=dbBlog;User Id=maralex@svrblog2;Password=13101998Marco" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\FERNANDEZ\\Desktop\\BlogChallenge\\BackEnd\\BackEnd\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\BackEnd\.AplicationDBContext\.sql$" />
+  </parameter>
 </parameters>

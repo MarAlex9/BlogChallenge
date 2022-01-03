@@ -4,8 +4,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Blog } from 'src/app/models/blog';
 import { BlogService } from 'src/app/services/blog.service';
+import { ListBlogsComponent } from '../list-blogs/list-blogs.component';
 
 @Component({
+  providers: [ListBlogsComponent],
   selector: 'app-crear-blog',
   templateUrl: './crear-blog.component.html',
   styleUrls: ['./crear-blog.component.css']
@@ -19,11 +21,13 @@ export class CrearBlogComponent implements OnInit {
   arrayBlog: Blog[] = [];
   showMainContent: Boolean = true;
   public verImagen: string | undefined;
+  public contador = 0
 
 
   constructor(private formBuilder: FormBuilder,
     private blogService: BlogService,
     private sanitizer: DomSanitizer,
+    private listBlogComponent: ListBlogsComponent,
     private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       id: 0,
@@ -33,6 +37,7 @@ export class CrearBlogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Obtner los datos guardados en el navegador
     this.arrayBlog = JSON.parse(localStorage.getItem('array'));
     if (this.arrayBlog == null) {
       this.arrayBlog = [];
@@ -44,19 +49,20 @@ export class CrearBlogComponent implements OnInit {
   guardar(blog: Blog) {
     try {
       if (confirm('Una vez guardado el artículo no se puede hacer modificaciones')) {
-        console.log(blog)
         this.blogService.guardar(blog).subscribe(data => {
-          this.form.reset();
-        })      
+
+        })
         this.toastr.success('Exitosamente', 'El artículo se guardo');
         this.verImagen = '';
-        this.deleteArticulo(blog);      
+        this.deleteArticulo(blog);
+        this.blogService.obtenerBlog();
+        this.listBlogComponent.updateGet();
       }
     }
     catch (error) {
       this.toastr.error(`${error}`, 'Error al guardar el artículo');
     }
-   // window.location.reload();
+
   }
 
   //Método para guardar la información en un array
@@ -108,7 +114,7 @@ export class CrearBlogComponent implements OnInit {
     localStorage.setItem('array', JSON.stringify(this.arrayBlog));
   }
 
-  //método que permite actualizar el array
+  //Método que permite actualizar el array
   actualizar(blog: Blog) {
     this.form.patchValue({
       titulo: blog.titulo,
@@ -119,6 +125,8 @@ export class CrearBlogComponent implements OnInit {
     this.editBlog = blog;
     this.showMainContent = false;
     this.editBlogFlag = true;
+    this.contador = blog.descripcion.length;
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
 
@@ -141,6 +149,11 @@ export class CrearBlogComponent implements OnInit {
 
   }
 
+  //Contar los caracteres del texArea
+  onKey(event: any) {
+    this.contador = event.target.value.length
+  }
+
   //Convierte la imagen en base 64 para guardar en la BDD
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
@@ -161,8 +174,10 @@ export class CrearBlogComponent implements OnInit {
         });
       };
     } catch (e) {
+      this.toastr.error(`${e}`, 'Error al convertir la imagen');
       return null;
     }
   }
   )
+
 }

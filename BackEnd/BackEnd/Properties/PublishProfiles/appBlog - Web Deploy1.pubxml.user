@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo se usa en el proceso de publicación y empaquetado del proyecto web. Para personalizar el comportamiento de este proceso,
+edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 para obtener más información. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAMj9ZO5tFq0+u0/h7NbQPVgAAAAACAAAAAAAQZgAAAAEAACAAAABD84UJ7WXfhuHyZno+M81ixDLCzSwNFgmhsGlVpdlm0gAAAAAOgAAAAAIAACAAAADL/2C+V8i4j1gwa0OjS4dOgoZxirN2Rmjzuvqrn2EdbIAAAAAI/IYG1IBcqFSoin25JJEimT/b5uS+bTgr18rQeEygyLIYV4++0d0QGBs2z4H75wLbPfiDMagHmzGe8sp/65Z6pVrjxe3m8Ly0V59b0Moh3k7yENCwZrNg+evZ6FKMjWkF7kyUi8M0FLvPCYumnpxyqnQ3QVmGPkmt+TWkVYy2MkAAAAApeqIVOJVVuQ72KtIzHMuH6Dg8R+B4XdPJQDVMOTuUcUUW9A3ZW71B+qB3t7xa/9kohnMTDdoR7IJtQr2GUQXA</EncryptedPassword>
+    <History>True|2022-01-03T04:26:29.4516749Z;False|2022-01-02T23:23:27.0610105-05:00;False|2022-01-02T23:21:12.2120370-05:00;True|2022-01-02T23:19:07.1745928-05:00;False|2022-01-02T23:15:29.4943451-05:00;True|2022-01-02T23:13:44.1633590-05:00;True|2022-01-02T23:13:03.4588465-05:00;True|2022-01-02T23:12:32.7812801-05:00;False|2022-01-02T23:09:14.6676951-05:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DevConnection">
+      <Value>Data Source=tcp:svrblog2.database.windows.net,1433%3bInitial Catalog=dbBlog%3bUser Id=maralex%40svrblog2%3bPassword=13101998Marco</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="BackEnd.AplicationDBContext">
+      <Value>Data Source=tcp:svrblog2.database.windows.net,1433%3bInitial Catalog=dbBlog%3bUser Id=maralex%40svrblog2%3bPassword=13101998Marco</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

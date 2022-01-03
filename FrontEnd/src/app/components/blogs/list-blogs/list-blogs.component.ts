@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Blog } from 'src/app/models/blog';
 import { BlogService } from 'src/app/services/blog.service';
 
@@ -9,12 +10,31 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class ListBlogsComponent implements OnInit {
   listBlog: Blog[] | undefined;
-  constructor(public blogService: BlogService) { }
+  constructor(public blogService: BlogService,
+    private toastr: ToastrService) { }
 
- 
+
   ngOnInit(): void {
-    this.blogService.obtenerBlog();
-    this.blogService.obtenerBlogRemote();
+    //Obtenemos las listas de las api remota y remota+
+    try {
+      this.blogService.obtenerBlog();
+      this.blogService.obtenerBlogRemote();
+    } catch (error) {
+      this.toastr.error(`${error}`, "Error al conectar con el servidor");
+    }
+
+  }
+
+  updateGet(){
+    //Obtenemos las listas de las api remota y remota+
+    try {
+      this.blogService.obtenerBlog();
+      this.blogService.obtenerBlogRemote();
+      console.log(this.blogService.list);
+    } catch (error) {
+      this.toastr.error(`${error}`, "Error al conectar con el servidor");
+    }
+
   }
 
 }

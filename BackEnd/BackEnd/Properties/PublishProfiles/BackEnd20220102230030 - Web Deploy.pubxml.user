@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Este archivo se usa en el proceso de publicación y empaquetado del proyecto web. Para personalizar el comportamiento de este proceso,
+edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 para obtener más información. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAMj9ZO5tFq0+u0/h7NbQPVgAAAAACAAAAAAAQZgAAAAEAACAAAADHuBge784JF/hDFtcYJQGkyvP3Rqc3knPqNwvMXwy8vQAAAAAOgAAAAAIAACAAAADnmA9Z6+eZivzpUAY7TZ/nFimeb/voVXNUerJ2o1uZbIAAAADMkbmzm+a+bIEC6PWJCbr5heg45F/ek4kQDRP8vulPS3+iNiNWSSvt9n18dlz1HsC8ETDezJ0Dwn759pexGoCkaxXiufDNMtzpIWkEeo9EFWu9RYo1tnYbvb/5e+SHM1pVrs2cUB2LoTzxM0G45eaQWxLzqSIs4xweAxIHopq9rUAAAADwuLHWLW+RoXoMBZ3gUguMGHaBcC4QCYH9AdSGfoRDzGM7upvIjtZFTyjt407KQxNy8dyAlh4axz93jPmw8+FG</EncryptedPassword>
+    <History>False|2022-01-03T04:06:40.1902408Z;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DevConnection">
+      <Value>Data Source=tcp:svrblog2.database.windows.net,1433%3bInitial Catalog=BackEnd_db%3bUser Id=maralex%40svrblog2%3bPassword=13101998Marco</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="BackEnd.AplicationDBContext">
+      <Value>Data Source=tcp:svrblog2.database.windows.net,1433%3bInitial Catalog=BackEnd_db%3bUser Id=maralex%40svrblog2%3bPassword=13101998Marco</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

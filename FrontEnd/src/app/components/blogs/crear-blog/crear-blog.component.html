@@ -12,17 +12,19 @@
             <div class="col-md-5">
                 <div class="form-group">
                     <div class="input-group">
-
-                        <input type="text" class="form-control" formControlName="titulo" placeholder="Título">
+                        <input type="text" class="form-control" formControlName="titulo" placeholder="Título"
+                            maxlength="200" title="Máximo 200 caracteres">
                     </div>
                 </div>
                 <br />
                 <div class="form-group">
                     <div class="input-group">
 
-                        <textarea formControlName="descripcion" rows="12" type="text" ng-model="xb" class="form-control"
-                            placeholder="Descripción" maxlength="3000"></textarea>
+                        <textarea formControlName="descripcion" (keyup)="onKey($event)" rows="12" type="text"
+                            ng-model="xb" class="form-control" title="Máximo 3000 caracteres" placeholder="Descripción"
+                            maxlength="3000"></textarea>
                     </div>
+                    <span>{{contador}} / 3000</span>
                 </div>
             </div>
             <div class="col-md-5">
@@ -66,13 +68,16 @@
         </div>
         <div class="row">
             <div class="col-md-1">
-                <i class="far fa-save fa-lg text-info" (click)="guardar(blog)" style="cursor: pointer;"></i>
+                <i title="Guardar" class="far fa-save fa-lg text-info" (click)="guardar(blog)"
+                    style="cursor: pointer;"></i>
             </div>
             <div class="col-md-1">
-                <i class="far fa-edit fa-lg text-info" (click)="actualizar(blog)" style="cursor: pointer;"></i>
+                <i title="Editar" class="far fa-edit fa-lg text-info" (click)="actualizar(blog)"
+                    style="cursor: pointer;"></i>
             </div>
             <div class="col-md-1">
-                <i class="far fa-trash-alt fa-lg text-danger" (click)="eliminar(blog)" style="cursor: pointer;"></i>
+                <i title="Eliminar" class="far fa-trash-alt fa-lg text-danger" (click)="eliminar(blog)"
+                    style="cursor: pointer;"></i>
             </div>
         </div>
         <br />
